@@ -1,0 +1,19 @@
+{
+  "name": "bookmark-vr",
+  "version": "1.0.0",
+  "description": "A VR Bookmarking System",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/falaeco/bookmark-vr.git"
+  },
+  "author": "Nicolas Prudhomme Xavier Champoux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/falaeco/bookmark-vr/issues"
+  },
+  "homepage": "https://github.com/falaeco/bookmark-vr#readme"
+}
