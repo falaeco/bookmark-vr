@@ -15,9 +15,11 @@
 
 <body>
 
-    <a-scene light="defaultLightsEnabled: false" background="color: white">
+    <a-scene light="defaultLightsEnabled: false" background="color: black" fog="type: linear; color: black; far: 50;">
         <a-assets>
             <img id="displacement" src="./assets/displacement.jpg">
+            <img id="grass" src="./assets/grass_texture.jpg">
+            <img id="color" src="./assets/color.jpg">
             <a-asset-item id="tree1-obj" src="./assets/tree01.obj"></a-asset-item>
             <a-asset-item id="tree1-mtl" src="./assets/tree01.mtl"></a-asset-item>
             <a-asset-item id="tree2-obj" src="./assets/tree02.obj"></a-asset-item>
@@ -26,20 +28,51 @@
             <a-asset-item id="tree3-mtl" src="./assets/tree03.mtl"></a-asset-item>
         </a-assets>
 
+        <a-entity camera="active: true; fov: 70" 
+        look-controls
+        position="0 0 0"
+        wasd-controls
+        >
+        <a-entity cursor="fuse: true;"
+        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+        position="0 0 -1"
+        ></a-entity>
+        </a-entity>
+
+
         <a-plane id="landscape"
         height="100"
         width="100"
+        src="#color"
         segments-height="200"
         segments-width="200"
-        wireframe="false"
-        position="0 -25 0"
+        wireframe="true"
+        position="0 -35 0"
         rotation="-90 0 0"
-        src="#displacement"
         displacement-map="#displacement"
-        displacement-scale="10"
+        displacement-scale="20"
+        roughness="1"
+        metalness="0"
         >
-        <a-entity obj-model="obj: #tree1-obj; mtl: #tree1-mtl" rotation="90 0 0" scale="2 2 2" position="0 0 5"></a-entity>
+        <a-entity obj-model="obj: #tree1-obj; mtl: #tree1-mtl" 
+        rotation="90 0 0" 
+        scale="2 2 2" 
+        position="0 0 5"
+        ></a-entity>
         </a-plane>
+
+        <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;"
+        material="wireframe: true; side: double; emissive: blue;"
+        ></a-entity>
+
+        <!-- <a-sphere color="black"
+        radius="10"
+        wireframe="true"
+        segments-width="10"
+        segments-height="10"
+        emissive="blue"
+        emissive-intensity="10"
+        ></a-sphere> -->
 
         <!-- <a-entity id="landscape"
         geometry="primitive: plane; height: 100; width: 100; segmentsHeight: 100; segmentsWidth: 100;"
@@ -48,9 +81,11 @@
         material="src: #displacement; displacementMap: #displacement; displacementScale: 10;"
         ></a-entity> -->
 
-        <a-entity light="type: directional; color: #FFF; intensity: 1" 
+        <!-- <a-entity light="type: directional; color: #FFF; intensity: 1;" 
         position="-0.5 1 1"
-        ></a-entity>
+        ></a-entity> -->
+
+        <a-entity light="type: ambient; color: white"></a-entity>
 
     </a-scene>
 
