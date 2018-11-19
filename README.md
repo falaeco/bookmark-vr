@@ -14,3 +14,10 @@ Final Project for CART 211
 - [ ] Add animations
 - [ ] Add ambiance soundtrack - Nature sounds, leafs... Or just a Menu-style music
 - [ ] Add random small events (optional)
+
+## Nicolas
+
+- [ ] Node system - User Interface
+- [ ] Onhover animation + UI
+- [ ] Onclick animation + UI
+- [ ] UI script
