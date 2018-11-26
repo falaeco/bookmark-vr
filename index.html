@@ -12,12 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="./js/Functions.js"></script>
+    <script src="./js/Data.js"></script>
     <script src="./js/Birds.js"></script>
 </head>
 
 <body>
 
-    <a-scene id="main_scene" light="defaultLightsEnabled: false" background="color: #c8daf7" fog="type: linear; color: #c8daf7; far: 100">
+    <a-scene id="main_scene" embedded light="defaultLightsEnabled: false" background="color: #c8daf7" fog="type: linear; color: #c8daf7; far: 100">
         <a-assets>
             <img id="displacement" src="./assets/displacement.jpg">
             <img id="color" src="./assets/color.jpg">
@@ -25,54 +26,37 @@
             <a-asset-item id="bird-obj" src="./assets/bird.OBJ"></a-asset-item>
         </a-assets>
 
-        <a-sky color="#c8daf7"></a-sky>
-
-        <a-entity 
-        camera="active: true; fov: 70" 
-        look-controls
-        position="0 0 0"
-        wasd-controls
-        >
-            <a-entity 
-            cursor="fuse: true;"
-            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
-            position="0 0 -1"
-            material="color: #7f8082; shader: flat"
-            ></a-entity>
+        <a-entity camera="active: true; fov: 70" look-controls position="0 0 0">
+            <a-entity cursor="fuse: true;" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" position="0 0 -1"
+                material="color: #7f8082; shader: flat"></a-entity>
         </a-entity>
 
-        <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;"
-        material="wireframe: true; side: double; emissive: blue;"
-        ></a-entity>
+        <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;" material="wireframe: true; side: double; emissive: blue;"></a-entity>
 
-        <a-entity id="sky"
-        geometry="primitive: sphere; radius: 100;"
-        material="color: #c8daf7"
-        >
-            <a-animation attribute="rotation"
-               dur="500000"
-               fill="forwards"
-               easing="linear"
-               to="360 0 360"
-               repeat="indefinite">
+        <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="color: #c8daf7">
+            <a-animation attribute="rotation" dur="500000" fill="forwards" easing="linear" to="360 0 360" repeat="indefinite">
             </a-animation>
         </a-entity>
 
-        <a-entity id="landscape"
-        geometry="primitive: plane; height: 400; width: 400; segmentsHeight: 200; segmentsWidth: 200;"
-        position="0 -50 0"
-        rotation="-90 0 0"
-        material="color: #56f442; displacementMap: #displacement; displacementScale: 20;"
-        ></a-entity>
+        <a-entity id="landscape" geometry="primitive: plane; height: 400; width: 400; segmentsHeight: 200; segmentsWidth: 200;"
+            position="0 -50 0" rotation="-90 0 0" material="color: #56f442; displacementMap: #displacement; displacementScale: 20;"></a-entity>
 
         <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
         <a-entity light="type: directional;
-                   castShadow: true;
-                   intensity: 0.4;"
+                           castShadow: true;
+                           intensity: 0.4;"
             position="0 0 0">
         </a-entity>
 
     </a-scene>
+
+    <section class="loading-screen">
+        <img src="./assets/logo.png" alt="logo">
+        <h1 class="loading">Loading your mind . . .</h1>
+    </section>
+    <section class="planning-screen">
+        <h1>Loading your mind . . .</h1>
+    </section>
 
     <script src="./js/main.js"></script>
 

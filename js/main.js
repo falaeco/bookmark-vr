@@ -6,6 +6,10 @@ for (var i = 0; i < 200; i++) {
     $('#sky').append('<a-entity geometry="primitive: torusKnot; radius: ' + scale + ';" material="emissive: purple; " position="' + pX + ' ' + pY + ' ' + pZ + '"></a-entity>');
 }
 
+nodeArray.forEach(element => {
+    
+});
+
 var birds = new Birds();
 var SpawnTimer = setInterval(spawnBirds, 1000);
 var TickPerFrame = setInterval(updateBirds, 500);

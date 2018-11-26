@@ -5,7 +5,7 @@ class Birds {
     }
 
     spawn() {
-        if (Math.random() > 0.50) {
+        if (Math.random() > 0.80) {
             var tempX = random_posInRange(-100, -50, 50, 100);
             var tempZ = random_posInRange(-100, -50, 50, 100);
             this.array.push(new Bird(tempX, tempZ));

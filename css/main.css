@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+#main_scene {
+    z-index: 1;
+}
+
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    background: #cecece;
+}
+.loading-screen img {
+    width: 10%;
+}
+.loading {
+    font-size: 30px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.planning-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    height: 100%;
+    width: 100%;
+    background: #d4b4b4;
+}
