@@ -16,3 +16,7 @@ function get_rotation(x, z) {
     var angle = Math.acos(x / hyp);
     return -angle;
 }
+
+function node_distribute(arrayLenght) {
+    
+}

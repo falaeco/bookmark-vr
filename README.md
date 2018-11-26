@@ -8,12 +8,12 @@ Final Project for CART 211
 
 ## Xavier
 
-- [ ] Make a better landscape
-- [ ] Work on a wireframed sphere
-- [ ] Create a sky
-- [ ] Add animations
+- [X] Make a better landscape
+- [-] Work on a wireframed sphere
+- [X] Create a sky
+- [X] Add animations
 - [ ] Add ambiance soundtrack - Nature sounds, leafs... Or just a Menu-style music
-- [ ] Add random small events (optional)
+- [-] Add random small events (optional)
 
 ## Nicolas
 

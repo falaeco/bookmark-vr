@@ -6,9 +6,12 @@ for (var i = 0; i < 200; i++) {
     $('#sky').append('<a-entity geometry="primitive: torusKnot; radius: ' + scale + ';" material="emissive: purple; " position="' + pX + ' ' + pY + ' ' + pZ + '"></a-entity>');
 }
 
-nodeArray.forEach(element => {
-    
-});
+function displayNodesGroups() {
+    $('.group-node').remove();
+    nodeArray.forEach(element => {
+        $('#main_scene').append('<a-entity class="group-node" geometry="primitive: sphere; radius: 0.3" material="emissive: #6a10e8; color: #6a10e8" position="0 0.1 -5"><a-entity text="value: ' + element.Name + '; align: center; color: black;" scale="5 5 5" position="0 0.5 0"></a-entity><a-animation attribute="position" dur="5000" direction="alternate" easing="ease-in-out" fill="forwards" to="0 -0.1 -5" repeat="indefinite"></a-animation></a-entity>');
+    });
+}
 
 var birds = new Birds();
 var SpawnTimer = setInterval(spawnBirds, 1000);

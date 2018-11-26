@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>LandScape Test</title>
+    <title>Orbs - Bookmarking</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" media="screen" href="./css/main.css" />
@@ -33,7 +33,7 @@
 
         <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;" material="wireframe: true; side: double; emissive: blue;"></a-entity>
 
-        <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="color: #c8daf7">
+        <a-entity id="sky" geometry="primitive: sphere; radius: 100;" material="color: transparent">
             <a-animation attribute="rotation" dur="500000" fill="forwards" easing="linear" to="360 0 360" repeat="indefinite">
             </a-animation>
         </a-entity>
@@ -55,7 +55,18 @@
         <h1 class="loading">Loading your mind . . .</h1>
     </section>
     <section class="planning-screen">
-        <h1>Loading your mind . . .</h1>
+        <figure>
+            <h1>ORBS</h1>
+            <h3>A book-markable experience</h3>
+        </figure>
+        <article class="group-list">
+            <h1>Groups</h1>
+            <ol id="groups"></ol>
+            <aside>
+                <input type="text" id="group-name">
+                <input type="submit" value="Create" onclick="new_group()">
+            </aside>
+        </article>
     </section>
 
     <script src="./js/main.js"></script>
