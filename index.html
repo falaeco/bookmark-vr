@@ -11,81 +11,66 @@
     <!--SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="./js/Functions.js"></script>
+    <script src="./js/Birds.js"></script>
 </head>
 
 <body>
 
-    <a-scene light="defaultLightsEnabled: false" background="color: black" fog="type: linear; color: black; far: 50;">
+    <a-scene id="main_scene" light="defaultLightsEnabled: false" background="color: #c8daf7" fog="type: linear; color: #c8daf7; far: 100">
         <a-assets>
             <img id="displacement" src="./assets/displacement.jpg">
-            <img id="grass" src="./assets/grass_texture.jpg">
             <img id="color" src="./assets/color.jpg">
-            <a-asset-item id="tree1-obj" src="./assets/tree01.obj"></a-asset-item>
-            <a-asset-item id="tree1-mtl" src="./assets/tree01.mtl"></a-asset-item>
-            <a-asset-item id="tree2-obj" src="./assets/tree02.obj"></a-asset-item>
-            <a-asset-item id="tree2-mtl" src="./assets/tree02.mtl"></a-asset-item>
-            <a-asset-item id="tree3-obj" src="./assets/tree03.obj"></a-asset-item>
-            <a-asset-item id="tree3-mtl" src="./assets/tree03.mtl"></a-asset-item>
+            <img id="starfield" src="./assets/starfield.png">
+            <a-asset-item id="bird-obj" src="./assets/bird.OBJ"></a-asset-item>
         </a-assets>
 
-        <a-entity camera="active: true; fov: 70" 
+        <a-sky color="#c8daf7"></a-sky>
+
+        <a-entity 
+        camera="active: true; fov: 70" 
         look-controls
         position="0 0 0"
         wasd-controls
         >
-        <a-entity cursor="fuse: true;"
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-        position="0 0 -1"
-        ></a-entity>
+            <a-entity 
+            cursor="fuse: true;"
+            geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+            position="0 0 -1"
+            material="color: #7f8082; shader: flat"
+            ></a-entity>
         </a-entity>
-
-
-        <a-plane id="landscape"
-        height="100"
-        width="100"
-        src="#color"
-        segments-height="200"
-        segments-width="200"
-        wireframe="true"
-        position="0 -35 0"
-        rotation="-90 0 0"
-        displacement-map="#displacement"
-        displacement-scale="20"
-        roughness="1"
-        metalness="0"
-        >
-        <a-entity obj-model="obj: #tree1-obj; mtl: #tree1-mtl" 
-        rotation="90 0 0" 
-        scale="2 2 2" 
-        position="0 0 5"
-        ></a-entity>
-        </a-plane>
 
         <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;"
         material="wireframe: true; side: double; emissive: blue;"
         ></a-entity>
 
-        <!-- <a-sphere color="black"
-        radius="10"
-        wireframe="true"
-        segments-width="10"
-        segments-height="10"
-        emissive="blue"
-        emissive-intensity="10"
-        ></a-sphere> -->
+        <a-entity id="sky"
+        geometry="primitive: sphere; radius: 100;"
+        material="color: #c8daf7"
+        >
+            <a-animation attribute="rotation"
+               dur="500000"
+               fill="forwards"
+               easing="linear"
+               to="360 0 360"
+               repeat="indefinite">
+            </a-animation>
+        </a-entity>
 
-        <!-- <a-entity id="landscape"
-        geometry="primitive: plane; height: 100; width: 100; segmentsHeight: 100; segmentsWidth: 100;"
-        position="0 -10 0"
+        <a-entity id="landscape"
+        geometry="primitive: plane; height: 400; width: 400; segmentsHeight: 200; segmentsWidth: 200;"
+        position="0 -50 0"
         rotation="-90 0 0"
-        material="src: #displacement; displacementMap: #displacement; displacementScale: 10;"
-        ></a-entity> -->
+        material="color: #56f442; displacementMap: #displacement; displacementScale: 20;"
+        ></a-entity>
 
-        <!-- <a-entity light="type: directional; color: #FFF; intensity: 1;" 
-        position="-0.5 1 1"
-        ></a-entity> -->
-
-        <a-entity light="type: ambient; color: white"></a-entity>
+        <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
+        <a-entity light="type: directional;
+                   castShadow: true;
+                   intensity: 0.4;"
+            position="0 0 0">
+        </a-entity>
 
     </a-scene>
 
