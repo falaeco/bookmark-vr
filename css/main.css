@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+#main_scene {
+    z-index: 1;
+}
+
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    background: #cecece;
+}
+.loading-screen img {
+    width: 10%;
+}
+.loading {
+    font-size: 30px;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.planning-screen {
+    display: flex;
+    justify-content: left;
+    align-items: baseline;
+    flex-flow: column;
+    height: 100%;
+    width: 100%;
+    background: #d4b4b4;
+}
+.planning-screen figure {
+    background: rgb(88, 88, 88);
+    height: 30%;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.planning-screen figure h1 {
+    font-size: 4vmax;
+}
+.planning-screen figure h3 {
+    font-size: 1.5vmax;
+}
+
+.group-list {
+    height: 70%;
+    width: 25%;
+    text-align: center;
+    background: #e9e9e9;
+}
+.group-list h1 {
+    font-size: 2vmax;
+    height: 10%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.group-list ol {
+    height: 70%;
+    background: #cecece;
+    overflow-y: scroll;
+    text-align: center;
+    padding: 5%;
+    list-style-type: none
+}
+.group-list ol li {
+    margin: 3px; 
+    padding: 0.4em; 
+    font-size: 1.4em; 
+    height: 18px;
+}
+.group-list ol li:hover {
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+.group-list aside {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
