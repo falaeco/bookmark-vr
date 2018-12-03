@@ -5,11 +5,13 @@
 html, body {
     height: 100%;
     width: 100%;
+    font-size: 14px;
 }
 ::-webkit-scrollbar {
     display: none;
 }
 #main_scene {
+    display: block;
     z-index: 1;
 }
 
@@ -36,12 +38,10 @@ html, body {
 
 .planning-screen {
     display: flex;
-    justify-content: left;
-    align-items: baseline;
-    flex-flow: column;
+    flex-flow: column wrap;
     height: 100%;
     width: 100%;
-    background: #d4b4b4;
+    background: #3a394b;
 }
 .planning-screen figure {
     background: rgb(88, 88, 88);
@@ -49,26 +49,29 @@ html, body {
     width: 25%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    text-align: center;
     flex-flow: column;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .planning-screen figure h1 {
-    font-size: 4vmax;
+    font-size: 3.5em;
 }
 .planning-screen figure h3 {
-    font-size: 1.5vmax;
+    font-size: 1.5em;
 }
 
 .group-list {
     height: 70%;
     width: 25%;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
     text-align: center;
     background: #e9e9e9;
 }
 .group-list h1 {
-    font-size: 2vmax;
+    font-size: 2em;
     height: 10%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -85,6 +88,7 @@ html, body {
     padding: 0.4em; 
     font-size: 1.4em; 
     height: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .group-list ol li:hover {
     background: black;
@@ -94,8 +98,48 @@ html, body {
 
 .group-list aside {
     height: 10%;
+    width: 100%;
+    padding-top: 0.5em;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: row wrap;
     text-align: center;
+}
+.group-list aside input{
+    width: 60%;
+}
+
+.group-elements {
+    display: flex;
+    flex-flow: column;
+    justify-content: baseline;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    background: #3a394b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.group-elements h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    min-width: 40%;
+    height: 10%;
+    font-size: 3em;
+    border-radius: 20px;
+    background: #f9f9ff;
+}
+
+@media all and (max-width: 1000px) {
+    body {
+        font-size: 10px;
+    }
+}
+
+@media all and (max-width: 600px) {
+    body {
+        font-size: 7px;
+    }
 }

@@ -11,14 +11,21 @@
     <!--SCRIPT-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-    <script src="./js/Functions.js"></script>
-    <script src="./js/Data.js"></script>
-    <script src="./js/Birds.js"></script>
+    <!-- A-FRAME COMMUNITY COMPONENT -->
+    <script src="https://unpkg.com/aframe-template-component@^3.1.1/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="./js/MathUtils.js"></script>
+    <script src="./js/BookmarkNodes.js"></script>
+    <script src="./js/BookmarkGroups.js"></script>
+    <script src="./js/Environment.js"></script>
 </head>
 
 <body>
 
     <a-scene id="main_scene" embedded light="defaultLightsEnabled: false" background="color: #c8daf7" fog="type: linear; color: #c8daf7; far: 100">
+<!-- ********** LANDSCAPE ELEMENTS ************ -->
         <a-assets>
             <img id="displacement" src="./assets/displacement.jpg">
             <img id="color" src="./assets/color.jpg">
@@ -26,8 +33,10 @@
             <a-asset-item id="bird-obj" src="./assets/bird.OBJ"></a-asset-item>
         </a-assets>
 
-        <a-entity camera="active: true; fov: 70" look-controls position="0 0 0">
-            <a-entity cursor="fuse: true;" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" position="0 0 -1"
+        <a-entity camera="active: true; fov: 70" look-controls wasd-controls position="0 0 0">
+            <a-entity id="cursor"
+                cursor="fuse: true; fuseTimeout: 2000" 
+                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" position="0 0 -1"
                 material="color: #7f8082; shader: flat"></a-entity>
         </a-entity>
 
@@ -40,7 +49,6 @@
 
         <a-entity id="landscape" geometry="primitive: plane; height: 400; width: 400; segmentsHeight: 200; segmentsWidth: 200;"
             position="0 -50 0" rotation="-90 0 0" material="color: #56f442; displacementMap: #displacement; displacementScale: 20;"></a-entity>
-
         <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
         <a-entity light="type: directional;
                            castShadow: true;
@@ -48,12 +56,46 @@
             position="0 0 0">
         </a-entity>
 
+<!-- *********** BOOKMARKS NODES *********** -->
+<!-- BOOKMARK TEST from tutorial
+    TODO: 
+        - change position functionality.
+            - with layout component.
+        - add sound effect?
+            - With sound="on: click; src: #click-sound" 
+        - create smoother animations
+    -->
+        
+        <a-assets>
+            <!-- GENERATE A TEMPLATE TO USE FOR ALL BOOKMARKS -->
+            <!-- BOOKMARK TEMPLATE: -->
+            <script id="bookmark-node" type="text/html">
+                <a-entity class="bookmark"
+                    geometry="primitive: sphere; radius: 0.4"
+                    material="emissive: #80A5FF; emissiveIntensity: 0.4; color: #2C55C6"
+                    position="0 0.1 -5"
+                    event-set__1="_event: mouseenter; scale: 1.6 1.6"
+                    event-set__2="_event: mouseleave; scale: 1">
+                </a-entity>
+            </script>
+        </a-assets>
+
+        <a-entity id="cluster1" layout="type: line; margin: 1.5" position="-3 -1 -4">
+            <a-entity template="src: #bookmark-node"></a-entity>
+            <a-entity template="src: #bookmark-node"></a-entity>
+            <a-entity template="src: #bookmark-node"></a-entity>
+        </a-entity>
     </a-scene>
+
+<!-- *********** LOADING SCREEN *********** -->
 
     <section class="loading-screen">
         <img src="./assets/logo.png" alt="logo">
         <h1 class="loading">Loading your mind . . .</h1>
     </section>
+
+<!-- *********** BOOKMARKS GROUPS *********** -->
+
     <section class="planning-screen">
         <figure>
             <h1>ORBS</h1>
@@ -64,12 +106,18 @@
             <ol id="groups"></ol>
             <aside>
                 <input type="text" id="group-name">
-                <input type="submit" value="Create" onclick="new_group()">
+                <input type="submit" value="Create" onclick="Group.create()">
             </aside>
         </article>
+        <section class="group-elements">
+            <h1>Test</h1>
+            <article>
+
+            </article>
+        </section>
     </section>
 
-    <script src="./js/main.js"></script>
+    <script src="./js/Core.js"></script>
 
 </body>
 

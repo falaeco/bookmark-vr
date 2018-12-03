@@ -9,15 +9,18 @@ Final Project for CART 211
 ## Xavier
 
 - [X] Make a better landscape
-- [-] Work on a wireframed sphere
+- [X] Work on a wireframed sphere
 - [X] Create a sky
 - [X] Add animations
 - [ ] Add ambiance soundtrack - Nature sounds, leafs... Or just a Menu-style music
-- [-] Add random small events (optional)
+- [X] Add random small events (optional)
 
 ## Nicolas
 
-- [ ] Node system - User Interface
-- [ ] Onhover animation + UI
+- [ ] **In Progress** Node system - User Interface
+- [ ] **In Progress** Onhover animation + UI
+    - We could use a-frame planes to display the information that fades in above
+      the node.
+    - Need to figure out a way to have smoother animations.
 - [ ] Onclick animation + UI
 - [ ] UI script
