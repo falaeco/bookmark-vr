@@ -22,31 +22,42 @@ AFRAME.registerComponent('bookmark', {
         description: {type: 'string', default: 'No description...'},
         url: {type: 'string', default: 'about:blank'},
         //add a thumbnail?
-        animDuration: {type: 'number', default: '300'}
     },
 
     init: function() {
         var data = this.data;
         var el = this.el;
 
-        el.addEventListener('mouseenter', function() {
-            el.emit()
-        })
-    },
+        //temporary duration
+        var tempDuration = 300;
+        el.addEventListener('fusing', function(){
+            console.log('Gaze entered the node');
+            //el.emit('scaleUp');
+        });
+        el.addEventListener('mouseleave', function(){
+            console.log('Gaze left the node');
+            //el.emit('scaleDown');
+        });
+        el.setAttribute('animation__scale', {
+            property: 'scale',
+            startEvents: 'fusing',
+            dur: `${tempDuration}`,
+            to: '1.6 1.6 1.6'
+        });
+       el.setAttribute('animation__scaleDown', {
+            property: 'scale',
+            startEvents: 'mouseleave',
+            dur: `${tempDuration}`,
+            dir: 'reverse',
+            to: '1.6 1.6 1.6'
+        });
 
-    /**
-     * Set up scale animation with the animation component
-     */
-    scaleOnHover: function() {
-        var data = this.data;
-        var el = this.el;
     }
 });
 
 /*
 Panels showing the information of the bookmark node
 AFRAME.regiterComponent('bookmark-information', {
-
 })
 */
 
