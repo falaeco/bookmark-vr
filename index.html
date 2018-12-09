@@ -25,7 +25,7 @@
 <body>
 
     <a-scene id="main_scene" embedded light="defaultLightsEnabled: false" background="color: #c8daf7" fog="type: linear; color: #c8daf7; far: 100">
-<!-- ********** LANDSCAPE ELEMENTS ************ -->
+        <!-- ********** LANDSCAPE ELEMENTS ************ -->
         <a-assets>
             <img id="displacement" src="./assets/displacement.jpg">
             <img id="color" src="./assets/color.jpg">
@@ -34,10 +34,8 @@
         </a-assets>
 
         <a-entity camera="active: true; fov: 70" look-controls wasd-controls position="0 0 0">
-            <a-entity id="cursor"
-                cursor="fuse: true; fuseTimeout: 2000" 
-                geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" position="0 0 -1"
-                material="color: #7f8082; shader: flat"></a-entity>
+            <a-entity id="cursor" cursor="fuse: true; fuseTimeout: 2000" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+                position="0 0 -1" material="color: #7f8082; shader: flat"></a-entity>
         </a-entity>
 
         <a-entity geometry="primitive: sphere; radius: 15; segmentsHeight: 10; segmentsWidth: 20;" material="wireframe: true; side: double; emissive: blue;"></a-entity>
@@ -56,8 +54,8 @@
             position="0 0 0">
         </a-entity>
 
-<!-- *********** BOOKMARKS NODES *********** -->
-<!-- BOOKMARK TEST from tutorial
+        <!-- *********** BOOKMARKS NODES *********** -->
+        <!-- BOOKMARK TEST from tutorial
     TODO: 
         - change position functionality.
             - with layout component.
@@ -65,7 +63,7 @@
             - With sound="on: click; src: #click-sound" 
         - create smoother animations
     -->
-        
+
         <a-assets>
             <!-- GENERATE A TEMPLATE TO USE FOR ALL BOOKMARKS -->
             <!-- BOOKMARK TEMPLATE: -->
@@ -87,33 +85,30 @@
         </a-entity>
     </a-scene>
 
-<!-- *********** LOADING SCREEN *********** -->
+    <!-- *********** LOADING SCREEN *********** -->
 
-    <section class="loading-screen">
+    <section class="loading-screen flex-center">
         <img src="./assets/logo.png" alt="logo">
         <h1 class="loading">Loading your mind . . .</h1>
     </section>
 
-<!-- *********** BOOKMARKS GROUPS *********** -->
+    <!-- *********** BOOKMARKS GROUPS *********** -->
 
     <section class="planning-screen">
-        <figure>
+        <figure class="flex-center">
             <h1>ORBS</h1>
             <h3>A book-markable experience</h3>
         </figure>
-        <article class="group-list">
+        <article class="group-list text-center">
             <h1>Groups</h1>
-            <ol id="groups"></ol>
-            <aside>
-                <input type="text" id="group-name">
+            <ol id="groups" class="scroll text-center"></ol>
+            <aside class="flex-center text-center">
+                <input type="text" id="title">
                 <input type="submit" value="Create" onclick="Group.create()">
             </aside>
         </article>
-        <section class="group-elements">
-            <h1>Test</h1>
-            <article>
-
-            </article>
+        <section class="group-elements scroll">
+            <h1 id="group-title" class="group-title text-center">Group</h1>
         </section>
     </section>
 
