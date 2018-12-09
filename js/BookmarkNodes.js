@@ -16,6 +16,7 @@
  * Bookmark node that contains all the information of the node and the 
  * appearance of the node in the VR space.
  */
+
 AFRAME.registerComponent('bookmark', {
     schema: {
         title: {type: 'string', default: 'Untitled'},
@@ -26,19 +27,35 @@ AFRAME.registerComponent('bookmark', {
 
     init: function() {
         var data = this.data;
+        var bookmarkEl = this.el;
+        var textElement = bookmarkEl.querySelector('.bookmark-text');
+        var nodeElement = bookmarkEl.querySelector('.bookmark-node');
+
+        nodeElement.addEventListener('mouseenter', function(){
+            console.log('Gaze entered the node');
+            $('#info-window > .info-title').html(`${data.title}`);
+            $('#info-window > .info-description').html(`${data.description}`);
+            $('#info-window').css('visibility', 'visible');
+        });
+
+        nodeElement.addEventListener('mouseleave', function(){
+            console.log('Gaze left the node');
+            $('#info-window').css('visibility', 'hidden');
+        });
+
+    }
+});
+
+AFRAME.registerComponent('hoverable', {
+    schema : {},
+
+    init: function (){
         var el = this.el;
 
         //temporary duration
         var tempDuration = 300;
-        el.addEventListener('fusing', function(){
-            console.log('Gaze entered the node');
-            //el.emit('scaleUp');
-        });
-        el.addEventListener('mouseleave', function(){
-            console.log('Gaze left the node');
-            //el.emit('scaleDown');
-        });
-        el.setAttribute('animation__scale', {
+
+        el.setAttribute('animation__scaleUp', {
             property: 'scale',
             startEvents: 'fusing',
             dur: `${tempDuration}`,
@@ -55,11 +72,8 @@ AFRAME.registerComponent('bookmark', {
     }
 });
 
-/*
-Panels showing the information of the bookmark node
-AFRAME.regiterComponent('bookmark-information', {
-})
-*/
+
+
 
 
 
