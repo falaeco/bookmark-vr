@@ -30,7 +30,7 @@ body {
     z-index: 10;
     bottom: 20px;
     left: 20px;
-    height: 100px;
+    height: auto;
     background-color: #0006;
     color: white;
     padding: 20px;
@@ -38,9 +38,17 @@ body {
     visibility: hidden;
 }
 
+#info-window > *:not(:last-child) {
+    padding-bottom: 5px;
+}
+
 .info-title{
     text-transform: capitalize;
-    padding-bottom: 5px;
+}
+
+.info-url{
+    font-style: italic;
+    color: rgb(224, 169, 218);
 }
 
 .loading-screen {

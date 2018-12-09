@@ -28,47 +28,83 @@ AFRAME.registerComponent('bookmark', {
     init: function() {
         var data = this.data;
         var bookmarkEl = this.el;
-        var textElement = bookmarkEl.querySelector('.bookmark-text');
         var nodeElement = bookmarkEl.querySelector('.bookmark-node');
+        var textElement = bookmarkEl.querySelector('.bookmark-text');
+
+        this.setUpHoverAnimation();
 
         nodeElement.addEventListener('mouseenter', function(){
             console.log('Gaze entered the node');
             $('#info-window > .info-title').html(`${data.title}`);
             $('#info-window > .info-description').html(`${data.description}`);
+            $('#info-window > .info-url').html(data.url);
             $('#info-window').css('visibility', 'visible');
+            textElement.emit('moveUp');
+            bookmarkEl.emit('hovered');
         });
 
         nodeElement.addEventListener('mouseleave', function(){
             console.log('Gaze left the node');
             $('#info-window').css('visibility', 'hidden');
+            textElement.emit('moveDown');
+            bookmarkEl.emit('cleared');
         });
 
-    }
-});
+        nodeElement.addEventListener('click', function(){
+            console.log(`Following url: ${data.url}`);
+            window.open(data.url, '_blank');
+        });
+    },
 
-AFRAME.registerComponent('hoverable', {
-    schema : {},
+    setUpHoverAnimation: function() {
+        var bookmarkEl = this.el;
+        var textElement = this.el.querySelector('.bookmark-text');
+        var nodeElement = this.el.querySelector('.bookmark-node');
 
-    init: function (){
-        var el = this.el;
-
-        //temporary duration
         var tempDuration = 300;
+        var size = 1.6;
 
-        el.setAttribute('animation__scaleUp', {
+        nodeElement.setAttribute('animation__scaleUp', {
             property: 'scale',
-            startEvents: 'fusing',
-            dur: `${tempDuration}`,
-            to: '1.6 1.6 1.6'
+            startEvents: 'mouseenter',
+            dur: tempDuration,
+            to: `${size} ${size} ${size}`
         });
-       el.setAttribute('animation__scaleDown', {
+
+        nodeElement.setAttribute('animation__scaleDown', {
             property: 'scale',
             startEvents: 'mouseleave',
-            dur: `${tempDuration}`,
+            dur: tempDuration,
             dir: 'reverse',
-            to: '1.6 1.6 1.6'
+            to: `${size} ${size} ${size}`
         });
 
+        textElement.setAttribute('animation__moveUp', {
+            property: 'position',
+            startEvents: 'moveUp',
+            dur: tempDuration,
+            from: '0 0.8 0',
+            to: '0 1.1 0'
+        });
+
+        textElement.setAttribute('animation__moveDown', {
+            property: 'position',
+            startEvents: 'moveDown',
+            dur: tempDuration,
+            from: '0 1.1 0',
+            to: '0 0.8 0'
+        });
+
+        bookmarkEl.setAttribute('animation__float', {
+            property: 'position',
+            dir: 'alternate',
+            dur: '2000',
+            easing: 'easeInOutSine',
+            loop: 'true',
+            pauseEvents: 'hovered',
+            resumeEvents: 'cleared',
+            to: '0 0.2 0'
+        });
     }
 });
 

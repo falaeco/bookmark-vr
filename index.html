@@ -81,11 +81,14 @@
         
         <a-assets>
             <!-- GENERATE A TEMPLATE TO USE FOR ALL BOOKMARKS -->
-            <!-- BOOKMARK TEMPLATE:-->
+            <!-- BOOKMARK TEMPLATE:
+
+            -->
             <script id="bookmark-node-template" type="text/html">
                 <a-entity class="bookmark-container"
                     bookmark="title: ${title}; description: ${description}; url: ${url}">
                     <a-entity class="bookmark-node intersectable"
+                        hoverable
                         geometry="primitive: sphere; radius: 0.4"
                         material="emissive: #80A5FF; emissiveIntensity: 0.4; color: #2C55C6">
                     </a-entity>
@@ -94,7 +97,7 @@
                         font="roboto"
                         color="black"
                         side="double"
-                        position="0 0.8"
+                        position="0 0.8 0"
                         opacity="1"
                         align="center"
                         width="4">
@@ -120,6 +123,7 @@
         <div id="info-window">
             <h1 class="info-title"></h1>
             <p class="info-description"></p>
+            <p class="info-url"></p>
         </div>
     </a-scene>
 
