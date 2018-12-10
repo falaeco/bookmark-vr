@@ -76,17 +76,16 @@ class group {
             // Add elements to planning screen
             for (let i = 0; i < this.groups[tempIndex].Elements.length; i++) {
                 const element = this.groups[tempIndex].Elements[i];
-                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.Name + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.Url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.Desc + '" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" webkitdirectory directory onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '" onclick="Group.picker();"></input></article>');
+                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.Name + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.Url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.Desc + '" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '" onclick="Group.picker();"></input></article>');
             }
         }
 
         // Create a null element
-        $('.group-elements').append('<article class="element-container"><input id="name" class="element-name element-input" type="text" value="Name Here" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="Url Here" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="Description Here" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" webkitdirectory directory onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="./assets/logo.png" onclick="Group.picker();"></input></article>');
+        $('.group-elements').append('<article class="element-container"><input id="name" class="element-name element-input" type="text" value="Name Here" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="Url Here" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="Description Here" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="./assets/logo.png" onclick="Group.picker();"></input></article>');
     }
 
     // Change a group element
     change(element) {
-        console.log(element.files);
 
         // Get group title
         var tempTitle = document.getElementById("group-title").innerHTML;

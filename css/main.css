@@ -146,14 +146,13 @@ html, body {
 /* Container */
 .element-container {
     background: #f9f9ff;
-    margin-top: 2%;
+    margin: 1% 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2%;
     flex-flow: wrap;
-    min-height: 15em;
-    width: 80%;
+    flex: 1 0 auto;
 }
 .element-name {
     background: rgb(68, 68, 68);
