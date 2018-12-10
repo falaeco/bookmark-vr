@@ -148,7 +148,7 @@ class BookmarkNodeManager {
  * 
  */
     addBookmarkToGroup(bookmark, bookmarkGroupName) {
-        if(!this.groupExist){
+        if(!this.groupExist()){
             console.log('Error: The Group does not exist');
             return;
         }
