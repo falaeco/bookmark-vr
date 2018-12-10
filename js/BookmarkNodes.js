@@ -134,7 +134,7 @@ class BookmarkNodeManager {
         newGroupEntity.className = 'cluster';
         newGroupEntity.id = newGroup.groupName;
         newGroupEntity.setAttribute('layout', 'type: line; margin: 1.5');
-        newGroupEntity.setAttribute('position', '1 1.5 1');
+        newGroupEntity.setAttribute('position', newGroup.position);
         sceneElement.appendChild(newGroupEntity);
         if(newGroup.bookmarkArray){
             newGroup.bookmarkArray.forEach((bookmark) => {
@@ -148,7 +148,7 @@ class BookmarkNodeManager {
  * 
  */
     addBookmarkToGroup(bookmark, bookmarkGroupName) {
-        if(!this.groupExist()){
+        if(!this.groupExist){
             console.log('Error: The Group does not exist');
             return;
         }
@@ -180,22 +180,43 @@ class BookmarkNodeManager {
             "Tumblr is a place to express yourself, discover yourself, and bond over the stuff you love. It's where your interests connect you with your people.",
             "https://www.tumblr.com/"), 'cluster1');
 
-    var myBookmarkGroup = {
-        groupName: 'cluster2' , 
-        bookmarkArray: [
+    var myBookmarkGroup = [
             {
-                title: 'Concordia University',
-                description: "Concordia University, located in the vibrant and cosmopolitan city of Montreal, Quebec, is one of Canada's most innovative and diverse, comprehensive",
-                url: 'https://www.concordia.ca/'
+                groupName: 'cluster2' ,
+                position: '1 1.5 1',
+                bookmarkArray: [
+                    {
+                        title: 'Concordia University',
+                        description: "Concordia University, located in the vibrant and cosmopolitan city of Montreal, Quebec, is one of Canada's most innovative and diverse, comprehensive",
+                        url: 'https://www.concordia.ca/'
+                    },
+                    {
+                        title: 'Bee - Wikipedia',
+                        description: 'Bees are flying insects closely related to wasps and ants, known for their role in pollination and, in the case of the best-known bee species, the western honey ...',
+                        url: 'https://en.wikipedia.org/wiki/Bee'
+                    }
+                ]
             },
             {
-                title: 'Bee - Wikipedia',
-                description: 'Bees are flying insects closely related to wasps and ants, known for their role in pollination and, in the case of the best-known bee species, the western honey ...',
-                url: 'https://en.wikipedia.org/wiki/Bee'
+                groupName: 'cluster3',
+                position: '-1 -1.5 1',
+                bookmarkArray: [
+                    {
+                        title: 'YouTube',
+                        description: 'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube',
+                        url: 'https://www.youtube.com/'
+                    },
+                    {
+                        title: 'Vimeo',
+                        description:"Join the web's most supportive community of creators and get high-quality tools for hosting, sharing, and streaming videos in gorgeous HD and 4K with no ads.",
+                        url: 'https://vimeo.com/'
+                    }
+                ]
             }
-        ]
-    }
-    bookmarkManager.addNewGroup(myBookmarkGroup);
+    ]
+    myBookmarkGroup.forEach((group) => {
+        bookmarkManager.addNewGroup(group);
+    });
  });
 
 

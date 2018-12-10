@@ -1,52 +1,48 @@
 /**
  * Handle the group panel and planning events.
  */
+class InvalidInputError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'InvalidInputError';
+    }
+}
 
-class group {
+class GroupManager {
     constructor() {
         this.groups = new Array();
+        this.bookmarkNodeManager = new BookmarkNodeManager();
     }
 
     // Create a new group and push it into group array
     create() {
 
-        // Get value from text input ->
-        var tempTitle = document.getElementById("title").value;
+        try {
+            // Get value from text input ->
+            var tempTitle = document.getElementById("title").value;
 
-        // If value is null
-        if (tempTitle == "") {
-            return alert("Please insert a name.");
-        }
-        // If group already exists
-        var tempExists = false;
-        this.groups.forEach(element => {
-            if (element.Title == tempTitle) {
-                tempExists = true;
-                return alert("Group already exists.");
+            // Check If value is null
+            if (tempTitle.trim() === "") {
+                throw new InvalidInputError('You need to enter a name');
             }
-        });
 
-        // If group does not exist
-        if (tempExists != true) {
+            // Check if it already exists
+            this.groups.forEach(element => {
+                if (element.Title === tempTitle) {
+                    throw new InvalidInputError('That group already exists');
+                }
+            });
 
             // Create a group element and push it
-            var group = {
-                Title: tempTitle,
-                Elements: [],
-            };
-            this.groups.push(group);
-
+            var newGroup = new BookmarkGroup(tempTitle);
+            this.groups.push(newGroup);
             // Append HTML list
             $('#groups').append('<li class="flex_center" onclick="Group.show(this)">' + tempTitle + '</li>');
 
-            // Remove text from text input
-            document.getElementById("title").value = "";
-
-            // HERE IS WHERE THE NODES SHOULD BE UPDATED!
-            // UPDATE NODES
-        }
-        // Remove text from text input
-        else {
+            this.bookmarkNodeManager.addNewGroup(newGroup);
+        } catch(err) {
+            return alert('Invalid Input: ' + err.message);
+        } finally {
             document.getElementById("title").value = "";
         }
     }
@@ -66,17 +62,17 @@ class group {
         document.getElementById("group-title").innerHTML = tempTitle;
 
         // Get array index
-        var tempIndex = this.groups.findIndex(group => group.Title == tempTitle);
+        var tempIndex = this.groups.findIndex(group => group.groupName == tempTitle);
 
         // Clear planning screen
         $('.element-container').remove();
 
         // Make sure element array is not null ->
-        if (this.groups[tempIndex].Elements.length != 0) {
+        if (this.groups[tempIndex].length != 0) {
             // Add elements to planning screen
-            for (let i = 0; i < this.groups[tempIndex].Elements.length; i++) {
-                const element = this.groups[tempIndex].Elements[i];
-                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.Name + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.Url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.Desc + '" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '" onclick="Group.picker();"></input></article>');
+            for (let i = 0; i < this.groups[tempIndex].length; i++) {
+                const element = this.groups[tempIndex];
+                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.title + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.description + '" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '" onclick="Group.picker();"></input></article>');
             }
         }
 
@@ -93,54 +89,48 @@ class group {
         // Get parent id
         var tempId = element.parentElement.id;
         // Get array index
-        var tempIndex = this.groups.findIndex(group => group.Title == tempTitle);
+        var tempIndex = this.groups.findIndex(group => group.title == tempTitle);
 
         // Check if element already exists
         if (tempId != "") {
             // Get input type
             if (element.id == "name") {
-                this.groups[tempIndex].Elements[tempId].Name = element.value;
+                this.groups[tempIndex].title = element.value;
             } else if (element.id == "url") {
-                this.groups[tempIndex].Elements[tempId].Url = element.value;
+                this.groups[tempIndex].url = element.value;
             } else if (element.id == "desc") {
-                this.groups[tempIndex].Elements[tempId].Desc = element.value;
-            } else if (element.id == "image") {
-                this.groups[tempIndex].Elements[tempId].Source = "./assets/logo.png";
+                this.groups[tempIndex].description = element.value;
             }
         } else {
             // Get input type
             if (element.id == "name") {
                 var temp = {
-                    Name: element.value,
-                    Url: "Url Here",
-                    Desc: "Description Here",
-                    Source: "./assets/logo.png"
+                    title: element.value,
+                    url: "Url Here",
+                    description: "Description Here"
                 };
-                this.groups[tempIndex].Elements.push(temp);
+                this.groups.push(temp);
             } else if (element.id == "url") {
                 var temp = {
-                    Name: "Name Here",
-                    Url: element.value,
-                    Desc: "Description Here",
-                    Source: "./assets/logo.png"
+                    title: "Name Here",
+                    url: element.value,
+                    description: "Description Here"
                 };
-                this.groups[tempIndex].Elements.push(temp);
+                this.groups.push(temp);
             } else if (element.id == "desc") {
                 var temp = {
-                    Name: "Name Here",
-                    Url: "Url Here",
-                    Desc: element.value,
-                    Source: "./assets/logo.png"
+                    title: "Name Here",
+                    url: "Url Here",
+                    description: element.value
                 };
-                this.groups[tempIndex].Elements.push(temp);
+                this.groups.push(temp);
             } else if (element.id == "image") {
                 var temp = {
-                    Name: "Name Here",
-                    Url: "Url Here",
-                    Desc: "Description Here",
-                    Source: "./assets/logo.png"
+                    title: "Name Here",
+                    url: "Url Here",
+                    description: "Description Here"
                 };
-                this.groups[tempIndex].Elements.push(temp);
+                this.groups.push(temp);
             }
         }
 
@@ -153,4 +143,4 @@ class group {
         $("#image").click();
     }
 }
-var Group = new group();
+var Group = new GroupManager();
