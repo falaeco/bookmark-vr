@@ -72,13 +72,13 @@
         <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
         <a-entity light="type: directional; castShadow: true; intensity: 0.4;" position="0 0 0"></a-entity>
 
-<!-- *********** BOOKMARKS NODES *********** -->
-<!-- BOOKMARK TEST from tutorial
+        <!-- *********** BOOKMARKS NODES *********** -->
+        <!-- BOOKMARK TEST from tutorial
     TODO: 
         - add sound effect?
             - With sound="on: click; src: #click-sound" 
     -->
-        
+
         <a-assets>
             <!-- GENERATE A TEMPLATE TO USE FOR ALL BOOKMARKS -->
             <!-- BOOKMARK TEMPLATE:
@@ -127,33 +127,30 @@
         </div>
     </a-scene>
 
-<!-- *********** LOADING SCREEN *********** -->
+    <!-- *********** LOADING SCREEN *********** -->
 
-    <section class="loading-screen">
+    <section class="loading-screen flex-center">
         <img src="./assets/logo.png" alt="logo">
         <h1 class="loading">Loading your mind . . .</h1>
     </section>
 
-<!-- *********** BOOKMARKS GROUPS *********** -->
+    <!-- *********** BOOKMARKS GROUPS *********** -->
 
     <section class="planning-screen">
-        <figure>
+        <figure class="flex-center">
             <h1>ORBS</h1>
             <h3>A book-markable experience</h3>
         </figure>
-        <article class="group-list">
+        <article class="group-list text-center">
             <h1>Groups</h1>
-            <ol id="groups"></ol>
-            <aside>
-                <input type="text" id="group-name">
+            <ol id="groups" class="scroll text-center"></ol>
+            <aside class="flex-center text-center">
+                <input type="text" id="title">
                 <input type="submit" value="Create" onclick="Group.create()">
             </aside>
         </article>
-        <section class="group-elements">
-            <h1>Test</h1>
-            <article>
-
-            </article>
+        <section class="group-elements scroll">
+            <h1 id="group-title" class="group-title text-center">Group</h1>
         </section>
     </section>
 

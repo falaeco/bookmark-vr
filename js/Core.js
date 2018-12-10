@@ -6,7 +6,3 @@
 Environment.create();
 // Update Environment -> Handle Birds
 Environment.update();
-
-if (document.getElementById("group-name").focus()) {
-    console.log("hey");
-}
