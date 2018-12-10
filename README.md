@@ -24,3 +24,5 @@ Final Project for CART 211
     - Need to figure out a way to have smoother animations.
 - [ ] Onclick animation + UI
 - [ ] UI script
+
+Set double side for background rectangle.
