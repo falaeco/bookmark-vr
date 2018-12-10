@@ -217,6 +217,10 @@ class BookmarkNodeManager {
     myBookmarkGroup.forEach((group) => {
         bookmarkManager.addNewGroup(group);
     });
+
+    document.querySelector('a-scene').addEventListener('loaded', function () {
+        $('#instruction-window').css('visibility', 'visible');
+    });
  });
 
 

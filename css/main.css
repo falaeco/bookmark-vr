@@ -50,17 +50,20 @@ body {
     z-index: 1;
 }
 
-#info-window{
+.info-window-interface{
     position: absolute;
-    z-index: 10;
-    bottom: 20px;
-    left: 20px;
     height: auto;
     background-color: #0006;
     color: white;
     padding: 20px;
-    width: 500px;
+    z-index: 10;
     visibility: hidden;
+}
+
+#info-window{
+    bottom: 20px;
+    left: 20px;
+    width: 500px;
 }
 
 #info-window > *:not(:last-child) {
@@ -76,6 +79,22 @@ body {
     color: rgb(224, 169, 218);
 }
 
+#instruction-window {
+    right: 5px;
+    width: 200px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#instruction-window h1 {
+    padding-bottom: 8px;
+}
+
+#instruction-window p:not(:last-child){
+    padding-bottom: 5px;
+}
+
+/* LOADING SCREEN */
 .loading-screen {
     position: absolute;
     top: 0;
