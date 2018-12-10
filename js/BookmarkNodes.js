@@ -3,16 +3,6 @@
  */
 
 /**
- * TODO: 
- *  - [X] Generate Bookmark Nodes components on the map
- *  - [ ] Create a on hover event
- *  
- * Useful information:
- * A-Frame can trigger custom event with the emit() function
- * 
- */
-
-/**
  * Bookmark node that contains all the information of the node and the 
  * appearance of the node in the VR space.
  */
@@ -109,7 +99,103 @@ AFRAME.registerComponent('bookmark', {
 });
 
 
+/**
+ * Inserting new nodes and group
+ */
+class Bookmark {
+    constructor(title, description, url) {
+        this.title = title;
+        this.description = description;
+        this.url = url;
+    }
+}
 
+class BookmarkGroup {
+    constructor(groupName, bookmarkArray = []) {
+        this.groupName = groupName;
+        this.bookmarkArray = bookmarkArray;
+    }
+}
 
+class BookmarkNodeManager {
+    
+    constructor() {
+        this.groupList = document.querySelectorAll('.cluster');
+    }
+
+    addNewGroup(newGroup) {
+        if(this.groupExist(newGroup.groupName)){
+            console.log('The group you are trying to add already exists');
+            return;
+        }
+
+        var sceneElement = document.querySelector('a-scene');
+        var newGroupEntity = document.createElement('a-entity');
+        newGroupEntity.className = 'cluster';
+        newGroupEntity.id = newGroup.groupName;
+        newGroupEntity.setAttribute('layout', 'type: line; margin: 1.5');
+        newGroupEntity.setAttribute('position', '1 1.5 1');
+        sceneElement.appendChild(newGroupEntity);
+        if(newGroup.bookmarkArray){
+            newGroup.bookmarkArray.forEach((bookmark) => {
+                this.addBookmarkToGroup(bookmark, newGroupEntity.id);
+            });
+        }
+    }
+
+/**
+ *  - Add it to the array of groups.
+ * 
+ */
+    addBookmarkToGroup(bookmark, bookmarkGroupName) {
+        if(!this.groupExist){
+            console.log('Error: The Group does not exist');
+            return;
+        }
+        var newBookmark = document.createElement('a-entity');
+        newBookmark.setAttribute('template', 'src: #bookmark-node-template');
+        newBookmark.setAttribute('data-title', bookmark.title);
+        newBookmark.setAttribute('data-description', bookmark.description);
+        newBookmark.setAttribute('data-url', bookmark.url);
+
+        //bookmarkGroup.bookmarkArray.push(bookmark);
+        document.querySelector(`#${bookmarkGroupName}`).appendChild(newBookmark);
+    }
+
+    groupExist(groupName) {
+        this.groupList.forEach((item) => {
+            if(item.id === groupName) return true;
+        });
+        return false;
+    }
+    
+}
+
+/* TEST */
+ $(document).ready(() => {
+    var bookmarkManager = new BookmarkNodeManager();
+    bookmarkManager.addBookmarkToGroup(
+        new Bookmark(
+            'Tumblr', 
+            "Tumblr is a place to express yourself, discover yourself, and bond over the stuff you love. It's where your interests connect you with your people.",
+            "https://www.tumblr.com/"), 'cluster1');
+
+    var myBookmarkGroup = {
+        groupName: 'cluster2' , 
+        bookmarkArray: [
+            {
+                title: 'Concordia University',
+                description: "Concordia University, located in the vibrant and cosmopolitan city of Montreal, Quebec, is one of Canada's most innovative and diverse, comprehensive",
+                url: 'https://www.concordia.ca/'
+            },
+            {
+                title: 'Bee - Wikipedia',
+                description: 'Bees are flying insects closely related to wasps and ants, known for their role in pollination and, in the case of the best-known bee species, the western honey ...',
+                url: 'https://en.wikipedia.org/wiki/Bee'
+            }
+        ]
+    }
+    bookmarkManager.addNewGroup(myBookmarkGroup);
+ });
 
 
