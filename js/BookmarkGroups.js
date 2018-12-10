@@ -2,13 +2,6 @@
  * Handle the group panel and planning events.
  */
 
-/**
- * TODO
- *  - Add a section to visualize the items of the group
- *  - Add a function to update and show nodes in canvas
- *  - Improve css
- */
-
 class group {
     constructor() {
         this.groups = new Array();
@@ -83,16 +76,17 @@ class group {
             // Add elements to planning screen
             for (let i = 0; i < this.groups[tempIndex].Elements.length; i++) {
                 const element = this.groups[tempIndex].Elements[i];
-                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.Name + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.Url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.Desc + '" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '"></input></article>');
+                $('.group-elements').append('<article id="' + i + '" class="element-container"><input id="name" class="element-name element-input" type="text" value="' + element.Name + '" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="' + element.Url + '" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="' + element.Desc + '" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" webkitdirectory directory onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="' + element.Source + '" onclick="Group.picker();"></input></article>');
             }
         }
 
         // Create a null element
-        $('.group-elements').append('<article class="element-container"><input id="name" class="element-name element-input" type="text" value="Name Here" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="Url Here" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="Description Here" onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="./assets/logo.png"></input></article>');
+        $('.group-elements').append('<article class="element-container"><input id="name" class="element-name element-input" type="text" value="Name Here" onchange="Group.change(this)"></input><input id="url" class="element-url element-input" type="text" value="Url Here" onchange="Group.change(this)"></input><input id="desc" class="element-desc element-input" type="text" value="Description Here" onchange="Group.change(this)"></input><input type="file" id="image" name="file-picker" accept="image/png, image/jpeg" style="display: none" webkitdirectory directory onchange="Group.change(this)"></input><input id="img" class="element-img" type="image" id="image" alt="thumbnail" src="./assets/logo.png" onclick="Group.picker();"></input></article>');
     }
 
     // Change a group element
     change(element) {
+        console.log(element.files);
 
         // Get group title
         var tempTitle = document.getElementById("group-title").innerHTML;
@@ -111,6 +105,8 @@ class group {
                 this.groups[tempIndex].Elements[tempId].Url = element.value;
             } else if (element.id == "desc") {
                 this.groups[tempIndex].Elements[tempId].Desc = element.value;
+            } else if (element.id == "image") {
+                this.groups[tempIndex].Elements[tempId].Source = "./assets/logo.png";
             }
         } else {
             // Get input type
@@ -138,11 +134,24 @@ class group {
                     Source: "./assets/logo.png"
                 };
                 this.groups[tempIndex].Elements.push(temp);
+            } else if (element.id == "image") {
+                var temp = {
+                    Name: "Name Here",
+                    Url: "Url Here",
+                    Desc: "Description Here",
+                    Source: "./assets/logo.png"
+                };
+                this.groups[tempIndex].Elements.push(temp);
             }
         }
 
         // Reset planning
         this.show(tempTitle);
+    }
+
+    // Open file picker
+    picker() {
+        $("#image").click();
     }
 }
 var Group = new group();
