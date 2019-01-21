@@ -1,6 +1,6 @@
 /* === CSS DOCUMENT === */
-
-/******** RESET ********/
+/* 1. General Setup */
+/* 1.1 Reset and normalization */
 
 *,
 *::after,
@@ -9,41 +9,66 @@
     padding: 0;
     box-sizing: inherit;
 }
+
+html{
+    font-size: 62.5%;
+}
+
 html, body {
     height: 100%;
     width: 100%;
-    font-size: 14px;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-/******** GENERAL ********/
+/* 1.3 Base */
 
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.4rem;
+}
+
+/* 1.2 Typographic Elements 
+TODO: set up other typographic elements like h1, etc.
+*/
+h1{
+    font-size: 2.5rem;
+}
+
+p:not(:last-child) {
+    padding-bottom: 0.5rem;
+}
+
+button{
+    padding: 0.2rem 1rem;
+}
+
+/* UTILITIES */
 .flex-center {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .text-center {
     text-align: center;
 }
-.element-input {
-    border: none;
-    text-align: center;
-}
+
 .scroll {
     overflow-y: scroll;
 }
 
-/******** UNIQUE ********/
+.center-horizontally{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
-/* Scene */
+/* 2. Templates and component */
+
+/* 2.A Scene */
 #main_scene {
     display: block;
     position: relative;
@@ -55,19 +80,15 @@ body {
     height: auto;
     background-color: #0006;
     color: white;
-    padding: 20px;
+    padding: 2rem;
     z-index: 10;
     visibility: hidden;
 }
 
 #info-window{
-    bottom: 20px;
-    left: 20px;
+    bottom: 2rem;
+    left: 2rem;
     width: 500px;
-}
-
-#info-window > *:not(:last-child) {
-    padding-bottom: 5px;
 }
 
 .info-title{
@@ -80,21 +101,19 @@ body {
 }
 
 #instruction-window {
-    right: 5px;
-    width: 200px;
+    right: 0.5rem;
+    width: 10vw;
+    min-width: 20rem;
     top: 50%;
     transform: translateY(-50%);
+    user-select: none;
 }
 
 #instruction-window h1 {
-    padding-bottom: 8px;
+    padding-bottom: 0.8rem;
 }
 
-#instruction-window p:not(:last-child){
-    padding-bottom: 5px;
-}
-
-/* LOADING SCREEN */
+/* 2B. LOADING SCREEN */
 .loading-screen {
     position: absolute;
     top: 0;
@@ -112,139 +131,215 @@ body {
     color: white;
 }
 
-/* Planning */
+/* ---- 2. Planning ---- */
 .planning-screen {
-    display: flex;
-    flex-flow: column wrap;
+    position: relative;
     height: 100%;
     width: 100%;
     background: #3a394b;
 }
-.planning-screen figure {
+
+/* ---- 2.1 Planning: Sidebar ---- */
+.planning-screen-sidebar {
+    height: 100%;
+    width: 25%;
+    min-width: 250px;
+    float: left;
+}
+
+/* ---- 2.1.1 Title  ---- */
+.planning-screen-title {
     background: rgb(88, 88, 88);
     height: 30%;
-    width: 25%;
+    width: 100%;
+    display: flex;
     flex-flow: column;
     color: white;
 }
-.planning-screen figure h1 {
-    font-size: 3.5em;
+
+.planning-screen-title h1 {
+    font-size: 3.5rem;
 }
-.planning-screen figure h3 {
-    font-size: 1.5em;
+.planning-screen-title h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* ---- 2.1.2 Group List ---- */
+.group-list-container {
+    width: 100%;
+    height: 70%;
+    background: #e9e9e9;
+    position: relative;
+}
+
+.group-list-title {
+    font-size: 2rem;
+    padding: 1rem;
 }
 
 .group-list {
-    height: 70%;
-    width: 25%;
-    display: flex;
-    justify-content: center;
-    flex-flow: column;
-    background: #e9e9e9;
-}
-.group-list h1 {
-    font-size: 2em;
-    height: 10%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.group-list ol {
-    height: 70%;
     background: #cecece;
-    padding: 5%;
-    list-style-type: none
+    height: 70%;
+    list-style-type: none;
 }
-.group-list ol li {
+
+.group-list li {
     margin: 3px; 
-    padding: 0.4em; 
-    font-size: 1.4em; 
-    height: 1em;
+    padding: 0.4rem; 
+    font-size: 1.4rem; 
+    vertical-align: middle;
 }
-.group-list ol li:hover {
+.group-list li:hover {
     background: black;
     color: white;
     cursor: pointer;
 }
 
-.group-list aside {
-    height: 10%;
+
+/* ---- 2.1.3 Create New Group Section ---- */
+.group-list-newgroup {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 20%;
     width: 100%;
-    padding-top: 0.5em;
-    flex-flow: row wrap;
-}
-.group-list aside input{
-    width: 60%;
 }
 
-.group-elements {
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-    justify-content: baseline;
-    width: 75%;
-    min-height: 100%;
-    background: #3a394b;
+.group-list-newgroup input {
+    width: 80%;
+    margin-bottom: 1rem;
+    height: 2rem;
+    padding: 0 5px;
 }
-.group-title {
-    margin-top: 2%;
-    min-width: 40%;
-    font-size: 2.5em;
+
+.group-list-newgroup button {
+    background: black;
+    color: white;
+    padding: 5px 15%;
+    border: 0;
+    border-radius: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.group-list-newgroup button:hover {
+    cursor: pointer;
+}
+
+.group-list-newgroup button:active {
+    background: blue;
+}
+
+/* ---- 2.2 Planing: Main area ---- */
+/* ---- 2.2.1 Group Title Container ---- */
+.group-title-container {
+    margin: 1.5rem auto;
+    width: 60%;
     border-radius: 20px;
     background: #f9f9ff;
+    padding: 0.5rem;
 }
 
-/* Container */
+.group-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.group-option {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.group-option li{
+    display: inline-block;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.group-option li:not(:last-child){
+    margin-right: 2rem;
+}
+
+.group-option li:hover{
+    color: #3a394b;
+}
+
+#DefaultColourInput {
+    height: 1rem;
+    width: 2.5rem;
+    padding: 0.2rem;
+}
+
+/* ---- 2.2.3 Element Container ----- */
 .element-container {
     background: #f9f9ff;
-    margin: 1% 0;
+    width: 80%;
+    height: 20rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+/* ---- 2.2.3.1 Normal mode  ---- */
+.element-info-mode{
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.element-info-mode a{
+    display: inline-block;
+    text-decoration: none;
+}
+
+.element-colour{
+    display: inline-block;
+    height: 2rem;
+    width: 4rem;
+    background-color: red;
+    vertical-align: middle;
+
+
+}
+
+/* ----- 2.2.3.2 Edit Mode ---- */
+.element-edit-mode{
+    width: 100%;
+}
+
+.element-input {
+    font-size: 1.4rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.3rem;
+}
+
+.element-desc.element-input{
+    height: 6rem;
+}
+
+.edit-row{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 2%;
-    flex-flow: wrap;
-    flex: 1 0 auto;
-}
-.element-name {
-    background: rgb(68, 68, 68);
-    color: white;
-    margin: 1%;
-    width: 30%;
-    height: 2em;
-    font-size: 1.5em;
-    font-weight: 100;
-}
-.element-url {
-    background: rgb(177, 177, 177);
-    color: white;
-    width: 65%;
-    margin: 1%;
-    height: 1.5em;
-    font-size: 1.5em;
-    font-weight: 100;
-}
-.element-desc {
-    color: black;
-    overflow-wrap: break-word;
-    text-align: left;
-    padding: 1%;
-    margin: 1%;
-    width: 80%;
-    height: 6em;
-    font-size: 1em;
-    font-weight: 100;
-}
-.element-img {
-    color: white;
-    margin: 1%;
-    max-width: 10em;
-    max-height: 10em;
-    font-weight: 100;
+    align-items: baseline;
 }
 
-/******* MEDIA QUERIES *******/
+#createNewEl {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/******* MEDIA QUERIES ******
+TODO:
+- Reduce margins of elements on resize.
+*/
 
 @media all and (max-width: 1000px) {
-    body {
-        font-size: 10px;
+    html {
+        font-size: 62.5%;
     }
     .group-infos {
         justify-content: center;
@@ -252,7 +347,12 @@ body {
 }
 
 @media all and (max-width: 600px) {
-    body {
-        font-size: 7px;
+    html {
+        font-size: 50%;
+    }
+
+    .group-list li,
+    .group-option li {
+        display: block;
     }
 }

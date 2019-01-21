@@ -24,7 +24,7 @@ AFRAME.registerComponent('bookmark', {
         this.setUpHoverAnimation();
 
         nodeElement.addEventListener('mouseenter', function(){
-            console.log('Gaze entered the node');
+            //console.log('Gaze entered the node');
             $('#info-window > .info-title').html(`${data.title}`);
             $('#info-window > .info-description').html(`${data.description}`);
             $('#info-window > .info-url').html(data.url);
@@ -34,7 +34,7 @@ AFRAME.registerComponent('bookmark', {
         });
 
         nodeElement.addEventListener('mouseleave', function(){
-            console.log('Gaze left the node');
+            //console.log('Gaze left the node');
             $('#info-window').css('visibility', 'hidden');
             textElement.emit('moveDown');
             bookmarkEl.emit('cleared');
@@ -116,11 +116,13 @@ class BookmarkGroup {
         this.bookmarkArray = bookmarkArray;
     }
 }
-
+/**
+ * This Class adds new groups in the a-frame scene
+ */
 class BookmarkNodeManager {
     
     constructor() {
-        this.groupList = document.querySelectorAll('.cluster');
+
     }
 
     addNewGroup(newGroup) {
@@ -158,12 +160,13 @@ class BookmarkNodeManager {
         newBookmark.setAttribute('data-description', bookmark.description);
         newBookmark.setAttribute('data-url', bookmark.url);
 
-        //bookmarkGroup.bookmarkArray.push(bookmark);
+        //bookmarkGroupName.bookmarkArray.push(bookmark);
         document.querySelector(`#${bookmarkGroupName}`).appendChild(newBookmark);
     }
 
     groupExist(groupName) {
-        this.groupList.forEach((item) => {
+        var groupList = document.querySelectorAll('.cluster');
+        groupList.forEach((item) => {
             if(item.id === groupName) return true;
         });
         return false;
@@ -172,55 +175,58 @@ class BookmarkNodeManager {
 }
 
 /* TEST */
- $(document).ready(() => {
-    var bookmarkManager = new BookmarkNodeManager();
-    bookmarkManager.addBookmarkToGroup(
-        new Bookmark(
-            'Tumblr', 
-            "Tumblr is a place to express yourself, discover yourself, and bond over the stuff you love. It's where your interests connect you with your people.",
-            "https://www.tumblr.com/"), 'cluster1');
-
-    var myBookmarkGroup = [
-            {
-                groupName: 'cluster2' ,
-                position: '1 1.5 1',
-                bookmarkArray: [
-                    {
-                        title: 'Concordia University',
-                        description: "Concordia University, located in the vibrant and cosmopolitan city of Montreal, Quebec, is one of Canada's most innovative and diverse, comprehensive",
-                        url: 'https://www.concordia.ca/'
-                    },
-                    {
-                        title: 'Bee - Wikipedia',
-                        description: 'Bees are flying insects closely related to wasps and ants, known for their role in pollination and, in the case of the best-known bee species, the western honey ...',
-                        url: 'https://en.wikipedia.org/wiki/Bee'
-                    }
-                ]
-            },
-            {
-                groupName: 'cluster3',
-                position: '-1 -1.5 1',
-                bookmarkArray: [
-                    {
-                        title: 'YouTube',
-                        description: 'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube',
-                        url: 'https://www.youtube.com/'
-                    },
-                    {
-                        title: 'Vimeo',
-                        description:"Join the web's most supportive community of creators and get high-quality tools for hosting, sharing, and streaming videos in gorgeous HD and 4K with no ads.",
-                        url: 'https://vimeo.com/'
-                    }
-                ]
-            }
-    ]
-    myBookmarkGroup.forEach((group) => {
-        bookmarkManager.addNewGroup(group);
-    });
-
-    document.querySelector('a-scene').addEventListener('loaded', function () {
+$(document).ready(function() {
+    document.querySelector('a-scene').addEventListener('loaded', function(){
+        var bookmarkManager = new BookmarkNodeManager();
+        bookmarkManager.addBookmarkToGroup(
+            new Bookmark(
+                'Tumblr', 
+                "Tumblr is a place to express yourself, discover yourself, and bond over the stuff you love. It's where your interests connect you with your people.",
+                "https://www.tumblr.com/"), 'cluster1');
+    
+        var myBookmarkGroup = [
+                {
+                    groupName: 'cluster2' ,
+                    position: '1 1.5 1',
+                    bookmarkArray: [
+                        {
+                            title: 'Concordia University',
+                            description: "Concordia University, located in the vibrant and cosmopolitan city of Montreal, Quebec, is one of Canada's most innovative and diverse, comprehensive",
+                            url: 'https://www.concordia.ca/'
+                        },
+                        {
+                            title: 'Bee - Wikipedia',
+                            description: 'Bees are flying insects closely related to wasps and ants, known for their role in pollination and, in the case of the best-known bee species, the western honey ...',
+                            url: 'https://en.wikipedia.org/wiki/Bee'
+                        }
+                    ]
+                },
+                {
+                    groupName: 'cluster3',
+                    position: '-1 -1.5 1',
+                    bookmarkArray: [
+                        {
+                            title: 'YouTube',
+                            description: 'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube',
+                            url: 'https://www.youtube.com/'
+                        },
+                        {
+                            title: 'Vimeo',
+                            description:"Join the web's most supportive community of creators and get high-quality tools for hosting, sharing, and streaming videos in gorgeous HD and 4K with no ads.",
+                            url: 'https://vimeo.com/'
+                        }
+                    ]
+                }
+        ]
+        myBookmarkGroup.forEach((group) => {
+            bookmarkManager.addNewGroup(group);
+        });
         $('#instruction-window').css('visibility', 'visible');
     });
- });
+});
+
+
+
+
 
 

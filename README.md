@@ -17,12 +17,10 @@ Final Project for CART 211
 
 ## Nicolas
 
-- [ ] **In Progress** Node system - User Interface
-- [ ] **In Progress** Onhover animation + UI
-    - We could use a-frame planes to display the information that fades in above
-      the node.
-    - Need to figure out a way to have smoother animations.
-- [ ] Onclick animation + UI
-- [ ] UI script
+- [X] Node system - User Interface
+- [X] Onhover animation + UI
+- [X] Links redirect to a new tab.
+- [X] Add functions to add new nodes to the system
+- [ ] Connect to the Group Manager to add new nodes
 
 Set double side for background rectangle.

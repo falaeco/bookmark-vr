@@ -73,7 +73,7 @@
         <a-entity light="type: directional; castShadow: true; intensity: 0.4;" position="0 0 0"></a-entity>
 
         <div class="info-window-interface" id="info-window">
-            <h1 class="info-title"></h1>
+            <h2 class="info-title"></h2>
             <p class="info-description"></p>
             <p class="info-url"></p>
         </div>
@@ -136,25 +136,74 @@
     <!-- *********** BOOKMARKS GROUPS *********** -->
 
     <section class="planning-screen">
-        <figure class="flex-center">
-            <h1>ORBS</h1>
-            <h3>A book-markable experience</h3>
-        </figure>
-        <article class="group-list text-center">
-            <h1>Groups</h1>
-            <ol id="groups" class="scroll text-center"></ol>
-            <aside class="flex-center text-center">
-                <input type="text" placeholder="Name of the new group" id="title">
-                <input type="submit" value="Create" onclick="Group.create()">
-            </aside>
-        </article>
+        <aside class="planning-screen-sidebar">
+            <figure class="planning-screen-title flex-center">
+                <h1>ORBS</h1>
+                <h2>A book-markable experience</h2>
+            </figure>
+            <article class="group-list-container text-center">
+                <h2 class="group-list-title">Groups</h2>
+                <ul id="groupsList" class="group-list scroll text-center">
+                    <li class="group-list-element">Hello World 1</li>
+                    <li class="group-list-element">Hello World 2</li>
+                </ul>
+                <div class="group-list-newgroup flex-center text-center">
+                    <h3>Create a new group</h3>
+                    <input type="text" placeholder="Name of the new group" id="title">
+                    <button onclick="Group.createGroup()"><strong>Create</strong></button>
+                </div>
+            </article>
+        </aside>
+
         <section class="group-elements scroll">
-            <h1 id="group-title" class="group-title text-center">Group</h1>
+            <div class="group-title-container">
+                <h1 id="group-title" class="group-title text-center">Group</h1>
+                <ul class="group-option">
+                    <li id="add-bookmark-option">Add a Bookmark</li>
+                    <li id="colour-option">Default Colour: <input type="color" name="Default Colour" id="DefaultColourInput"></li>
+                    <li id="delete-option">Delete Group</li>
+                </ul>                
+            </div>
+            <article id="0" class="element-container flex-center">
+                <div class="element-info-mode">
+                    <h2 class="element-name">Soundcloud.com</h2>
+                    <a class="element-url" href="https://soundcloud.com/discover">https://soundcloud.com/discover</a>
+                    <p class="element-desc">Get on SoundCloud to connect with fans, share your sounds, and grow your audience. What are you waiting for? Find out more. Thanks for listening. Now join in</p>
+                    
+                    <div class="edit-row">
+                        <p><strong>Colour: </strong><span class="element-colour"></span></p>
+                        <button id="editGroup" type="button" onclick="editGroup(this);">Edit</button>
+                    </div>
+                </div>
+                <div class="element-edit-mode" style="display: none;">
+                        <input id="name" class="element-name element-input" type="text" 
+                        placeholder="Enter a name" value="soundcloud.com">
+                    <input id="url" class="element-url element-input" type="url" 
+                        placeholder="Enter a url" value="https://soundcloud.com/discover">
+                    <input id="description" class="element-desc element-input" type="textarea" 
+                        placeholder="Enter a description">
+                    <div class="edit-row">
+                        <input type="color" name="Color" id="New-Color">
+                        <button id="updateBookmark" type="button" onclick="updateGroup(this);">This is a test</button>
+                    </div>
+                </div>
+            </article>
+            <article id="1" class="element-container">
+                <input id="name" class="element-name element-input" type="text" 
+                    placeholder="Enter a name" value="">
+                <input id="url" class="element-url element-input" type="url" 
+                    placeholder="Enter a url" value="">
+                <input id="description" class="element-desc element-input" type="textarea" 
+                    placeholder="Enter a description">
+            </article>
+            <button disabled="disabled" id="createNewEl">ADD NEW BOOKMARK</button>
         </section>
     </section>
-
-    <script src="./js/Core.js"></script>
-
+    <!-- SCRIPTS -->
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+              crossorigin="anonymous"></script>
+    <script src="js/BookmarkGroupTest.js"></script>
 </body>
-
 </html>
